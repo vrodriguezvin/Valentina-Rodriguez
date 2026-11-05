@@ -8,6 +8,7 @@ grafico_h <- tardar_vs_incumplir %>%
            x = "Tiempo total entre compra y entrega", y = "Puntaje promedio (1 a 5)",
            fill = NULL) +theme_minimal()
 
+#Sugerencia 1: Porcentaje de malas reseñas según si llegó tarde
 
 df %>%
   mutate(estado = ifelse(llego_tarde, "Tarde", "A tiempo")) %>%
@@ -15,11 +16,14 @@ df %>%
   geom_bar(position = "fill") +
   labs(title = "Reseñas negativas según puntualidad", x = "Entrega", y = "Proporción", fill = "Mala reseña")
 
+#Sugerencia 2. Cantidad de pedidos que llegaron tarde y a tiempo, porque permite visualizar cuántos pedidos cumplieron la fecha prometida y cuántos no.
 
 ggplot(df, aes(x = llego_tarde)) +
   geom_bar(fill = "steelblue") +
   labs(title = "Cantidad de pedidos según puntualidad", x = "Llegó tarde", y = "Cantidad de pedidos")
 
+#Sugerencia 3. Agregar un gráfico de barras que muestre la calificación promedio según los días de atraso, 
+# agrupados en intervalos. Así es más fácil visualizar si cuanto más se atrasa un pedido, peor es su calificación.
 
 df %>%
   filter(dias_atraso > 0) %>%
